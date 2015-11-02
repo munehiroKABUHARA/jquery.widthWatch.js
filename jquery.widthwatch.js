@@ -1,7 +1,8 @@
-/*!
-  jquery.widthWatch.js v1 ~ Copyright (c) 2015 Munehiro KABUHARA, https://github.com/munehiroKABUHARA/jquery.widthWatch.js
-  Released under MIT license, https://github.com/munehiroKABUHARA/jquery.widthWatch.js
-*/
+/**
+ * jquery.widthWatch.js v1.1 - https://github.com/munehiroKABUHARA/jquery.widthWatch.js
+ * Copyright 2015 Munehiro KABUHARA,
+ * Licensed under MIT
+ */
 
 (function($) {
     $.fn.widthWatch = function(options){
@@ -33,7 +34,7 @@
 	    	targetIPod    = navigator.userAgent.indexOf('iPod'),
 	    	targetAndroid = navigator.userAgent.indexOf('Android');
 
-		var init = function(frag) {
+		var init = function() {
 	    	windowWidth   = $(window).width(),
 	    	targetIphone  = navigator.userAgent.indexOf('iPhone'),
 	    	targetIPod    = navigator.userAgent.indexOf('iPod'),
@@ -85,17 +86,3 @@
 
     };
 })(jQuery);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
