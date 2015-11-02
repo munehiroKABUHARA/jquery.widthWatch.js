@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* bodyに付与されたclassで背景画像を出し分けてます */
+body.pc-style{
+	background: #0E7AC4;
+}
+body.tab-style{
+	background: #F26964;
+}
+body.retina-style{
+	background: #1253A4;
+}
+body.iphn6-style{
+	background: #FFD464;
+}
+body.sp-style{
+	background: #2FCDB4;
+}
+
+
+h1{
+	font-size: 16px;
+	color:#fff;
+}
+#text{
+	color: #fff;
+}
+#text span{
+	font-weight: bold;
+	font-size: 20px;
+	text-decoration: underline;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="jquery.widthwatch.js"></script>
+<script>
+$(document).ready(function(){
+
+	$('body').widthWatch({ //対象のdomは基本的になんでもOKです。
+		// ↓ここからOption：変更する必要がなければ書かなくて大丈夫です→ 「$('body').widthWatch()」これだけ
+    	pc_bp : 950,
+    	tb_bp : 768,
+    	retina_bp : 640,
+    	iphn6 : 375,
+    	sp_bp1 : 480,
+    	sp_bp2 : 320,
+    	// ↓ここから対応するwidthのclass名など　書き換えたい場合は追記してください
+    	pcClass : 'pc-style',
+    	tabClass : 'tab-style',
+    	retinaClass : 'retina-style',
+    	iphn6Class : 'iphn6-style',
+    	spClass : 'sp-style',
+    	androidClass : 'android-style',
+    	iOSClass: 'iOS-style',
+    	// ↓ここからは対応するwidthの場合起動するJSのコールバックです。必要な場合に追記してください。
+		resizeOn_pc: function() { 
+			console.log('******* pcの時だけ起動するfunctionや変数をここに書きます *******');
+			$(this).find('#text').html('このテキストは<span>pc</span>のwidthの時だけ起動するJSのfunctionです');
+		},
+		resizeOn_tb: function() { 
+			console.log('******* tbの時だけ起動するfunctionや変数をここに書きます *******');
+			$(this).find('#text').html('このテキストは<span>tablet</span>のwidthの時だけ起動するJSのfunctionです');
+		},
+		resizeOn_sp: function() { 
+			console.log('******* spの時だけ起動するfunctionや変数をここに書きます *******');
+			$(this).find('#text').html('このテキストは<span>sp</span>のwidthの時だけ起動するJSのfunctionです');
+		}
+	});
+
+});
+</script>
+
+<title>jquery.widthwatch.js</title>
+</head>
+<body>
+
+<h1>media queryを使わず、bodyに付与されたclassで背景色を出し分けてます</h1>
+<div id="text"></div>
+
+</body>
+</html>
