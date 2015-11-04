@@ -41,23 +41,23 @@
 	    	targetAndroid = navigator.userAgent.indexOf('Android');
 
 			if(windowWidth >= setting.pc_bp){
-				el.attr('class','')
+				el.attr('class','');
 				el.addClass(setting.pcClass);
 				setting.resizeOn_pc.call(el);
 			}else if(windowWidth >= setting.tb_bp){
-				el.attr('class','')
+				el.attr('class','');
 				el.addClass(setting.tabClass);
 				setting.resizeOn_tb.call(el);
 			}else if(windowWidth >= setting.retina_bp){
-				el.attr('class','')
+				el.attr('class','');
 				el.addClass(setting.retinaClass);
 				el.addClass(setting.spClass);
 			}else if(windowWidth >= setting.sp_bp1){
-				el.attr('class','')
+				el.attr('class','');
 				el.addClass(setting.spClass);
 				setting.resizeOn_sp.call(el);
 			}else if(windowWidth >= setting.sp_bp2){
-				el.attr('class','')
+				el.attr('class','');
 				el.addClass(setting.spClass);
 				setting.resizeOn_sp.call(el);
 			}

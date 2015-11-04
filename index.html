@@ -22,10 +22,10 @@ body.sp-style{
 	background: #2FCDB4;
 }
 
-
 h1{
 	font-size: 16px;
-	color:#fff;
+	color: #fff;
+	margin-bottom: 40px;
 }
 #text{
 	color: #fff;
@@ -37,12 +37,12 @@ h1{
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="jquery.widthwatch.js"></script>
+<script src="jquery.widthwatch.min.js"></script>
 <script>
 $(document).ready(function(){
 
 	$('body').widthWatch({ //対象のdomは基本的になんでもOKです。
-		// ↓ここからOption：変更する必要がなければ書かなくて大丈夫です→ 「$('body').widthWatch()」これだけ
+		// ↓ここからOption：ブレイクポイントを指定してください。変更する必要がなければ書かなくて大丈夫です。「$('body').widthWatch()」これだけ
     	pc_bp : 950,
     	tb_bp : 768,
     	retina_bp : 640,
@@ -66,7 +66,7 @@ $(document).ready(function(){
 			console.log('******* tbの時だけ起動するfunctionや変数をここに書きます *******');
 			$(this).find('#text').html('このテキストは<span>tablet</span>のwidthの時だけ起動するJSのfunctionです');
 		},
-		resizeOn_sp: function() { 
+		resizeOn_sp: function() {
 			console.log('******* spの時だけ起動するfunctionや変数をここに書きます *******');
 			$(this).find('#text').html('このテキストは<span>sp</span>のwidthの時だけ起動するJSのfunctionです');
 		}
