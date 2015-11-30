@@ -2,6 +2,7 @@
 
 
 レスポンシブでよく書きそうなwidth判別JS
+[DEMO]: http://enum-kabu.com/plugin/jquery.widthWatch/
 
 
 **【大きく分けて3つの機能です】**
