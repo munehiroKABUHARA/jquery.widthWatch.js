@@ -2,7 +2,7 @@
 
 
 レスポンシブでよく書きそうなwidth判別JS
-[DEMO]: http://enum-kabu.com/plugin/jquery.widthWatch/ "DEMO"
+
 
 
 **【大きく分けて3つの機能です】**
@@ -14,6 +14,10 @@
 3. Android、iPhone判別でclass付与(おまけ的に)
 
 ---------------------------------------------------------------------------
+
+[DEMO](http://enum-kabu.com/plugin/jquery.widthWatch/)
+
+
 
 **1.widthによってclass付与、付与する名前を設定**
 
