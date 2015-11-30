@@ -6,6 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 /* bodyに付与されたclassで背景画像を出し分けてます */
+*{
+	margin:0;
+	padding:0;
+	text-align: center;
+	list-style-type: none;
+	color:#fff;
+}
 body.pc-style{
 	background: #0E7AC4;
 }
@@ -21,25 +28,80 @@ body.iphn6-style{
 body.sp-style{
 	background: #2FCDB4;
 }
-
+#wrap{
+	max-width: 960px;
+	margin:0 auto;
+	padding:20px 5px 40px;
+}
 h1{
-	font-size: 16px;
+	font-size: 28px;
 	color: #fff;
-	margin-bottom: 40px;
+	padding:40px 0;
+	margin:0 0 20px 0;
+}
+h2{
+	font-size: 24px;
+	color: #fff;
+	padding:0;
+	margin:0;
+}
+p{
+	color: #fff;
+	font-size: 14px;
+	margin-bottom: 20px;	
+	line-height: 1.5;	
 }
 #text{
 	color: #fff;
+	font-size: 14px;	
+	margin:0 0 40px 0;
+	line-height: 1.5;
 }
 #text span{
 	font-weight: bold;
 	font-size: 20px;
 	text-decoration: underline;
 }
+.btnElem{
+	width:125px;
+	margin:0 auto 60px;
+}
+.btnElem a{
+	display: block;
+	padding:12px;
+	border: 1px solid #fff;
+	color: #fff;
+	text-decoration: none;
+}
+.btnElem a:hover{
+	background: #fff;
+	color: #333;
+}
+pre,
+code{
+	text-align: left;
+	line-height: 1.3;
+	font-size: 14px;
+}
+.section{
+	padding:20px 0 0 0;
+}
+
 </style>
+<link rel="stylesheet" href="styles/tomorrow-night-bright.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="jquery.widthwatch.min.js"></script>
+<script src="highlight.pack.js"></script>
+
 <script>
 $(document).ready(function(){
+
+
+
+	var alertTxt;
+	$('#pcBlock, #tbBlock, #spBlock').css('display','none');
+
+
 
 	$('body').widthWatch({ //対象のdomは基本的になんでもOKです。
 		// ↓ここからOption：ブレイクポイントを指定してください。変更する必要がなければ書かなくて大丈夫です。「$('body').widthWatch()」これだけ
@@ -61,16 +123,46 @@ $(document).ready(function(){
 		resizeOn_pc: function() { 
 			console.log('******* pcの時だけ起動するfunctionや変数をここに書きます *******');
 			$(this).find('#text').html('このテキストは<span>pc</span>のwidthの時だけ起動するJSのfunctionです');
+			$('#pcBlock').css('display','block');
+			alertTxt =  'PCのボタンClick時のテキストです';
 		},
 		resizeOn_tb: function() { 
 			console.log('******* tbの時だけ起動するfunctionや変数をここに書きます *******');
 			$(this).find('#text').html('このテキストは<span>tablet</span>のwidthの時だけ起動するJSのfunctionです');
+			$('#tbBlock').css('display','block');
+			alertTxt =  'TabletのボタンClick時のテキストです';
 		},
 		resizeOn_sp: function() {
 			console.log('******* spの時だけ起動するfunctionや変数をここに書きます *******');
 			$(this).find('#text').html('このテキストは<span>sp</span>のwidthの時だけ起動するJSのfunctionです');
+			$('#spBlock').css('display','block');
+			alertTxt =  'SPのボタンClick時のテキストです';
 		}
 	});
+
+
+
+	$('.btnElem').on('click',function(e){
+		e.preventDefault();
+		alert(alertTxt);
+		return false;
+	});
+
+
+
+	var timer = false;
+	$(window).resize(function() {
+	    if (timer !== false) { clearTimeout(timer); }
+	    timer = setTimeout(function() {
+			$('#pcBlock,#tbBlock,#spBlock').css('display','none');
+	    }, 50);
+	});
+
+
+
+
+
+hljs.initHighlighting();
 
 });
 </script>
@@ -78,9 +170,62 @@ $(document).ready(function(){
 <title>jquery.widthwatch.js</title>
 </head>
 <body>
+<div id="wrap">
+	<h1>jquery.widthwatch.js</h1>
+	<p>media queryを使わず、bodyに付与されたclassで背景色を出し分けています</p>
+	<div id="text"></div>
+	<div id="pcBlock"><div class="btnElem"><a href="">PC-Btn</a></div></div>
+	<div id="tbBlock"><div class="btnElem"><a href="">TB-Btn</a></div></div>
+	<div id="spBlock"><div class="btnElem"><a href="">SP-Btn</a></div></div>
 
-<h1>media queryを使わず、bodyに付与されたclassで背景色を出し分けてます</h1>
-<div id="text"></div>
+	<div class="section">
+	<h2>Option</h2>		
+		<pre>
+			<code class="javascript hljs">
+	// ↓ブレイクポイントを指定してください。
+	pc_bp : 950,
+	tb_bp : 768,
+	retina_bp : 640,
+	iphn6 : 375,
+	sp_bp1 : 480,
+	sp_bp2 : 320,
 
+	// ↓対応するwidthのclass名
+	pcClass : 'pc-style',
+	tabClass : 'tab-style',
+	retinaClass : 'retina-style',
+	iphn6Class : 'iphn6-style',
+	spClass : 'sp-style',
+	androidClass : 'android-style',
+	iOSClass: 'iOS-style',
+			</code>
+		</pre>
+
+	</div>		
+	<div class="section">
+	<h2>CallBack</h2>
+		<pre>
+			<code class="javascript hljs">
+	// それぞれのwidthの場合に起動するJSのコールバック
+	resizeOn_pc: function() { 
+		console.log('******* pcの時だけ起動するfunctionや変数をここに書きます *******');
+	},
+	resizeOn_tb: function() { 
+		console.log('******* tbの時だけ起動するfunctionや変数をここに書きます *******');
+	},
+	resizeOn_sp: function() {
+		console.log('******* spの時だけ起動するfunctionや変数をここに書きます *******');
+	}
+			</code>
+		</pre>
+	</div>
+	<div class="section">
+	<h2>Download</h2>
+	<ul>
+		<li><a href="http://enum-kabu.com/plugin/jquery.widthWatch/jquery.widthwatch.js">jquery.widthwatch.js</a></li>
+		<li><a href="http://enum-kabu.com/plugin/jquery.widthWatch/jquery.widthwatch.min.js">jquery.widthwatch.min.js</a></li>
+	</ul>
+	</div>
+</div>
 </body>
 </html>
