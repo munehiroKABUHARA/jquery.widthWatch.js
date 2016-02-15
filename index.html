@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Lato:300,100' rel='stylesheet' type='text/css'>
 <style>
 /* bodyに付与されたclassで背景画像を出し分けてます */
 *{
@@ -34,37 +35,49 @@ body.sp-style{
 	padding:20px 5px 40px;
 }
 h1{
-	font-size: 28px;
+	font-size: 62px;
 	color: #fff;
 	padding:40px 0;
 	margin:0 0 20px 0;
+	font-family: 'Lato', sans-serif;
+	font-weight: 100;
+	letter-spacing: 0.03em;
+}
+.sp-style h1{
+	font-size: 36px;
 }
 h2{
-	font-size: 24px;
-	color: #fff;
+	font-size: 40px;
+	color: #333;
 	padding:0;
-	margin:0;
+	font-family: 'Lato', sans-serif;
+	font-weight: 100;
+	letter-spacing: 0.03em;
+}
+.sp-style h2{
+	font-size: 32px;
 }
 p{
 	color: #fff;
 	font-size: 14px;
 	margin-bottom: 20px;	
-	line-height: 1.5;	
+	line-height: 1.5;
+	font-family: 'Lato', sans-serif;
 }
 #text{
 	color: #fff;
 	font-size: 14px;	
 	margin:0 0 40px 0;
 	line-height: 1.5;
+	font-family: 'Lato', sans-serif;
 }
 #text span{
-	font-weight: bold;
 	font-size: 20px;
 	text-decoration: underline;
 }
 .btnElem{
 	width:125px;
-	margin:0 auto 60px;
+	margin:0 auto 40px;
 }
 .btnElem a{
 	display: block;
@@ -72,6 +85,7 @@ p{
 	border: 1px solid #fff;
 	color: #fff;
 	text-decoration: none;
+	font-family: 'Lato', sans-serif;
 }
 .btnElem a:hover{
 	background: #fff;
@@ -82,13 +96,41 @@ code{
 	text-align: left;
 	line-height: 1.3;
 	font-size: 14px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;	
 }
-.section{
-	padding:20px 0 0 0;
+pre{
+	margin-top:-10px;
 }
-
+.hljs{
+	padding:0.5em 2em!important;	
+}
+.inner{
+	padding:50px 5px 20px;
+	max-width: 960px;
+	margin:0 auto;	
+}
+#option{
+	background: #e1e1e1;
+}
+#callback{
+	background: #f0f0f0;
+}
+#download{
+	background: #111;
+}
+#download h2{
+	color: #fff;
+}
+#download ul li a{
+	color: #888
+}
+#download .inner{
+	padding:50px 5px 60px;
+}
 </style>
-<link rel="stylesheet" href="styles/tomorrow-night-bright.css">
+<link rel="stylesheet" href="styles/solarized_dark.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="jquery.widthwatch.min.js"></script>
 <script src="highlight.pack.js"></script>
@@ -105,20 +147,20 @@ $(document).ready(function(){
 
 	$('body').widthWatch({ //対象のdomは基本的になんでもOKです。
 		// ↓ここからOption：ブレイクポイントを指定してください。変更する必要がなければ書かなくて大丈夫です。「$('body').widthWatch()」これだけ
-    	pc_bp : 950,
-    	tb_bp : 768,
-    	retina_bp : 640,
-    	iphn6 : 375,
-    	sp_bp1 : 480,
-    	sp_bp2 : 320,
+        pc_bp: 950,
+        tb_bp: 768,
+        iphn6_bp: 375,
+        landscape_bp: 568,
+        portlate_bp: 320,
     	// ↓ここから対応するwidthのclass名など　書き換えたい場合は追記してください
-    	pcClass : 'pc-style',
-    	tabClass : 'tab-style',
-    	retinaClass : 'retina-style',
-    	iphn6Class : 'iphn6-style',
-    	spClass : 'sp-style',
-    	androidClass : 'android-style',
-    	iOSClass: 'iOS-style',
+        pcClass: 'pc-style',
+        tabClass: 'tab-style',
+        iphn6Class: 'iphn6-style',
+        spClass: 'sp-style',
+        oriPortlate: 'portrait-style',
+        oriLandscape: 'landscape-style',
+        androidClass: 'android-style',
+        iOSClass: 'iOS-style',
     	// ↓ここからは対応するwidthの場合起動するJSのコールバックです。必要な場合に追記してください。
 		resizeOn_pc: function() { 
 			console.log('******* pcの時だけ起動するfunctionや変数をここに書きます *******');
@@ -171,61 +213,66 @@ hljs.initHighlighting();
 </head>
 <body>
 <div id="wrap">
-	<h1>jquery.widthwatch.js</h1>
-	<p>media queryを使わず、bodyに付与されたclassで背景色を出し分けています</p>
+	<h1>jquery.widthwatch</h1>
+	<p>bodyに付与されたclassで背景色を出し分けています</p>
 	<div id="text"></div>
 	<div id="pcBlock"><div class="btnElem"><a href="">PC-Btn</a></div></div>
 	<div id="tbBlock"><div class="btnElem"><a href="">TB-Btn</a></div></div>
 	<div id="spBlock"><div class="btnElem"><a href="">SP-Btn</a></div></div>
-
-	<div class="section">
+</div>
+	<div id="option">
+		<div class="inner">
 	<h2>Option</h2>		
 		<pre>
 			<code class="javascript hljs">
-	// ↓ブレイクポイントを指定してください。
-	pc_bp : 950,
-	tb_bp : 768,
-	retina_bp : 640,
-	iphn6 : 375,
-	sp_bp1 : 480,
-	sp_bp2 : 320,
+// ↓ブレイクポイントを指定してください。
+pc_bp: 950,
+tb_bp: 768,
+iphn6_bp: 375,
+landscape_bp: 568,
+portlate_bp: 320,
 
-	// ↓対応するwidthのclass名
-	pcClass : 'pc-style',
-	tabClass : 'tab-style',
-	retinaClass : 'retina-style',
-	iphn6Class : 'iphn6-style',
-	spClass : 'sp-style',
-	androidClass : 'android-style',
-	iOSClass: 'iOS-style',
+// ↓対応するwidthのclass名
+pcClass: 'pc-style',
+tabClass: 'tab-style',
+iphn6Class: 'iphn6-style',
+spClass: 'sp-style',
+oriPortlate: 'portrait-style',
+oriLandscape: 'landscape-style',
+androidClass: 'android-style',
+iOSClass: 'iOS-style',
 			</code>
 		</pre>
-
+		</div>
 	</div>		
-	<div class="section">
+	<div id="callback">
+		<div class="inner">
 	<h2>CallBack</h2>
 		<pre>
 			<code class="javascript hljs">
-	// それぞれのwidthの場合に起動するJSのコールバック
-	resizeOn_pc: function() { 
-		console.log('******* pcの時だけ起動するfunctionや変数をここに書きます *******');
-	},
-	resizeOn_tb: function() { 
-		console.log('******* tbの時だけ起動するfunctionや変数をここに書きます *******');
-	},
-	resizeOn_sp: function() {
-		console.log('******* spの時だけ起動するfunctionや変数をここに書きます *******');
-	}
+// それぞれのwidthの場合に起動するJSのコールバック
+resizeOn_pc: function() { 
+	console.log('******* pcの時だけ起動するfunctionや変数をここに書きます *******');
+},
+resizeOn_tb: function() { 
+	console.log('******* tbの時だけ起動するfunctionや変数をここに書きます *******');
+},
+resizeOn_sp: function() {
+	console.log('******* spの時だけ起動するfunctionや変数をここに書きます *******');
+}
 			</code>
 		</pre>
+		</div>
 	</div>
-	<div class="section">
-	<h2>Download</h2>
-	<ul>
-		<li><a href="http://enum-kabu.com/plugin/jquery.widthWatch/jquery.widthwatch.js">jquery.widthwatch.js</a></li>
-		<li><a href="http://enum-kabu.com/plugin/jquery.widthWatch/jquery.widthwatch.min.js">jquery.widthwatch.min.js</a></li>
-	</ul>
+	<div id="download">
+		<div class="inner">
+			<h2>Download</h2>
+			<ul>
+				<li><a href="http://enum-kabu.com/plugin/jquery.widthWatch/jquery.widthwatch.js">jquery.widthwatch.js</a></li>
+				<li><a href="http://enum-kabu.com/plugin/jquery.widthWatch/jquery.widthwatch.min.js">jquery.widthwatch.min.js</a></li>
+			</ul>
+		</div>
 	</div>
-</div>
+
 </body>
 </html>
